@@ -1,0 +1,12 @@
+Package: stockTools
+Type: Package
+Title: Tools for xts Stock Tickers
+Version: 0.1.2
+Author: Mattew Davis  
+Maintainer: Matthew Davis <mdavis29f@gmail.com>
+Description: This provides a set of tools that manipulate xts stock tickers downloaded from quantmod
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Depends: xts, quantmod
+RoxygenNote: 5.0.1.9000
