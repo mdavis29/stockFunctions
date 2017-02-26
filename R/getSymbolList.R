@@ -10,7 +10,26 @@ getSymbolList<-function(symbol.list = NULL ,
                         st = as.Date("1999-02-01"), 
                         aa = FALSE){
   
-  if(is.null(symbol.list)){symbol.list<-c('^DJI','GSPC','NDAQ', '^N225','^GDAXI', '^FTSE')}
+  if(is.null(symbol.list)){symbol.list<-c('^DJI',
+                                          'XAX', 'GSPC',
+                                          'NDAQ', 
+                                          '^N225',
+                                          '^GDAXI', 
+                                          '^FTSE',
+                                          'NQGM',
+                                          '^RUI',
+                                          'OIL',
+                                          'UBG',
+                                          'SOYB',
+                                          'WEAT',
+                                          'CORN',
+                                          'COW',
+                                          'VHT',
+                                          'FDX',
+                                          "AA",
+                                          "CAT",
+                                          'WMT')
+                                          }
   
   output.merged<-xts()
     for (i in 1:(length(symbol.list))){

@@ -22,4 +22,3 @@ creates a buy sell hold trade signal from stock quotes downloaded using quatmod
 \author{
 Matthew Davis
 }
-

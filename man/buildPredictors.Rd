@@ -18,4 +18,3 @@ takes and xts object and uses TTR package to create non lagged formated set of p
 \author{
 Matthew Davis
 }
-

@@ -12,6 +12,6 @@ Basic Tools for predicting the stock makes:
    \item T.flag takes a T.ind signal and creates a buy, sell or hold flag
    \item buildPredictors takes and xts OHLCV object and builds a set of predictors based on TTR package
    \item getSymbol.list looks up a list of symbols and returns a merged xts of them
+   \item updateXts updates a merged xts of stock tickers 
   }
 }
-

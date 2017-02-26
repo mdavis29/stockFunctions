@@ -20,4 +20,3 @@ flags when to buy sell and hold a stock, after inputing trade signal from T.ind(
 \author{
 Matthew Davis
 }
-
