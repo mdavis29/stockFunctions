@@ -38,10 +38,17 @@ getSymbolList<-function(symbol.list = NULL ,
 
           if(is.null(nrow(temp))){
              temp<-try(getSymbols(symbol.list[i], from = st, auto.assign = aa, src = "google"))
-                if(is.null(nrow(temp))){print(paste(symbol.list[i], 'failed to fetch Data'))}
-                                }
-              output.merged<-merge.xts(output.merged, temp)
-                                  }
+          }
+          if(is.null(nrow(temp))){
+            temp<-try(getSymbols(paste('^', symbol.list[i], sep = ''), from = st, auto.assign = aa, src = "yahoo"))
+          }
+          if(is.null(nrow(temp))){
+          temp<-try(getSymbols(paste('^', symbol.list[i], sep = ''), from = st, auto.assign = aa, src = "google"))
+          }              
+          if(is.null(nrow(temp))){print(paste(symbol.list[i], 'failed to fetch Data'))}    
+        
+        output.merged<-merge.xts(output.merged, temp)}
+                                  
 
         return(output.merged)
       }

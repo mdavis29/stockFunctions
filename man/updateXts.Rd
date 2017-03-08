@@ -7,7 +7,7 @@
 updateXts(mydata)
 }
 \arguments{
-\item{symbol.list}{a merged xts object where the columns are stock OHLC Data}
+\item{mydata}{merged xts object where the columns are stock OHLC Data}
 }
 \value{
 merged xts of stock tickers updated to the previous day.

@@ -1,5 +1,5 @@
 #' @title Update my merged List of stock tickers 
-#' @param symbol.list  a merged xts object where the columns are stock OHLC Data 
+#' @param mydata merged xts object where the columns are stock OHLC Data 
 #' @author Matthew Davis
 #' @export
 #' @description looks up a list of stock tickers and returns a merged xts of them
