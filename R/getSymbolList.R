@@ -26,7 +26,6 @@ getSymbolList<-function(symbol.list = NULL ,
                                           'COW',
                                           'VHT',
                                           'FDX',
-                                          "AA",
                                           "CAT",
                                           'WMT')
                                           }
