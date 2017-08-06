@@ -4,19 +4,16 @@
 \alias{T.flag}
 \title{Trade Signal Flag}
 \usage{
-T.flag(x, sig = 0.1)
+T.flag(x, margin = 0.025)
 }
 \arguments{
 \item{x}{An xts object containing output from T.ind()}
 
-\item{sig}{Signal strength that triggers a buy or sell}
+\item{margin}{signal strength from T.ind() that will trigger the flag}
 }
 \value{
 xts object of trade signals,buy = 1, sell = -1, hold = 0
 }
 \description{
 flags when to buy sell and hold a stock, after inputing trade signal from T.ind()
-}
-\author{
-Matthew Davis
 }

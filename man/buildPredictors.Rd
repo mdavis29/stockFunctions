@@ -4,12 +4,18 @@
 \alias{buildPredictors}
 \title{Build Predictors}
 \usage{
-buildPredictors(x)
+buildPredictors(x, funList = NULL, funNames = NULL)
 }
 \arguments{
 \item{x}{An xts object containing stock quotes (OHLCV info) from quant mod}
+
+\item{funList}{a list of functions for to build features from and xts object}
+
+\item{funNames}{column names for the the output xts}
 }
 \value{
+and xts with the funNames and ouput from funList
+
 xts object of predictors (not lagged) to be used to predict the trade signal
 }
 \description{

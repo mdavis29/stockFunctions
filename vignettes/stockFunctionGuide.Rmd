@@ -1,0 +1,19 @@
+---
+title: "stockFunctions Guide"
+author: "Matthew Davis"
+date: "August 6, 2017"
+output: html_document
+---
+set up enviroment and get Data
+```{r setup, include=FALSE, comment = '', message=FALSE}
+library(stockTools)
+if(!exists('E'))E<-new.env()
+getHistoricalStocks(c('GE',  "AA" ), e = E , startDate = '2000-01-01')
+eapply(E, function(x)tail(x,1))
+```
+
+Update enviroment with latest stock data 
+```{r}
+tickerEnvUpdate(E)
+eapply(E, function(x)tail(x,1))
+```
