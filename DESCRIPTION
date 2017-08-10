@@ -8,7 +8,7 @@ Description: This provides a set of tools that manipulate xts stock tickers down
 License: MIT
 Encoding: UTF-8
 LazyData: true
-Depends: xts, quantmod, parallel, doParallel, TTR
+Depends: xts, quantmod, parallel, doParallel, TTR, foreach
 Suggests: knitr
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1

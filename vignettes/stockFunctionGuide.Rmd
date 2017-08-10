@@ -1,19 +1,43 @@
 ---
 title: "stockFunctions Guide"
 author: "Matthew Davis"
-date: "August 6, 2017"
-output: html_document
+date: "8-8-2017"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
-set up enviroment and get Data
-```{r setup, include=FALSE, comment = '', message=FALSE}
+
+##### This is a guide on how to use stockFunctions package
+
+This package is intendent to simpify turning daily stock ticker open high low close volume data into a a matrix for machine learning.  The objective is essentailly to predict simulataniouslly a group of stocks.
+
+get Historical stocks takes a list of stock tickers and saves them as xts objects in an Enviroment
+```{r setup, comment = '', message=FALSE}
 library(stockTools)
 if(!exists('E'))E<-new.env()
-getHistoricalStocks(c('GE',  "AA" ), e = E , startDate = '2000-01-01')
+getHistoricalStocks(c('GE',  "AA" ), e = E , startDate = '2000-01-01', endDate = '2017-08-01')
 eapply(E, function(x)tail(x,1))
 ```
 
-Update enviroment with latest stock data 
+tickerEnvUpdate takes an enviroment with xts stock data, and updates each object with the latest data
 ```{r}
 tickerEnvUpdate(E)
 eapply(E, function(x)tail(x,1))
 ```
+
+buildStockDataSetFromEnv takes an enviroment with xts stock ticker data stored in it and merges it together in one data frame.
+It also uses functions from myfeatures.r ( a wrapper for the TTR package) to do feature engineering.
+
+```{r}
+## working here
+ls(E)
+head(E$AA)
+x<-buildStockDataSetFromEnv(E)
+dim(x)
+tail(x,2)
+```
+
+
+

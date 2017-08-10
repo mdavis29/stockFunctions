@@ -4,7 +4,7 @@
 \alias{buildStockDataSetFromEnv}
 \title{Build Stock Data Predictors from Enviroment}
 \usage{
-buildStockDataSetFromEnv(e, stockNameList = NULL)
+buildStockDataSetFromEnv(e, stockNameList = NULL, verbose = FALSE)
 }
 \arguments{
 \item{e}{enviroment where the xts stock data is stored}

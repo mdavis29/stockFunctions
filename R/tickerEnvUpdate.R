@@ -15,6 +15,7 @@ tickerEnvUpdate<-function(e,
   startDate<-as.Date(startDate)
   ## if there is no end Date, use the sys date
   if(is.null(endDate)){endDate<-Sys.Date() - 1}
+  if(is.null(symbolList))symbolList<-ls(E)
   ## loop through the symbol list and pull the symbols out of the env
   for (i in 1:(length( symbolList))){
     output<-NULL
