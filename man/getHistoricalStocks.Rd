@@ -4,12 +4,10 @@
 \alias{getHistoricalStocks}
 \title{get SP 500 Historical}
 \usage{
-getHistoricalStocks(sp500Symbols, e, startDate = "2000-01-01",
-  endDate = NULL, sleepTime = 3)
+getHistoricalStocks(symboList, e, startDate = "2000-01-01", endDate = NULL,
+  sleepTime = 3, cleanColNames = TRUE, verbose = FALSE)
 }
 \arguments{
-\item{sp500Symbols}{a list of the the SP 500 or any symbol list}
-
 \item{e}{enviroment to stor the data}
 
 \item{startDate}{text string date to start}
@@ -17,6 +15,8 @@ getHistoricalStocks(sp500Symbols, e, startDate = "2000-01-01",
 \item{endDate}{text string date to end}
 
 \item{sleepTime}{time to sleep in betweenn}
+
+\item{sp500Symbols}{a list of the the SP 500 or any symbol list}
 }
 \description{
 function that attemps to get the entire sp500 and store it in an enviroment

@@ -80,15 +80,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stockTools)
 if(!<span class="kw">exists</span>(<span class="st">'E'</span>))E&lt;-<span class="kw">new.env</span>()
 <span class="kw">getHistoricalStocks</span>(<span class="kw">c</span>(<span class="st">'GE'</span>,  <span class="st">&quot;AA&quot;</span> ), <span class="dt">e =</span> E , <span class="dt">startDate =</span> <span class="st">'2000-01-01'</span>, <span class="dt">endDate =</span> <span class="st">'2017-08-01'</span>)</code></pre></div>
-<pre><code>[1] &quot;AA&quot; &quot;GE&quot;</code></pre>
+<pre><code>NULL</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">eapply</span>(E, function(x)<span class="kw">tail</span>(x,<span class="dv">1</span>))</code></pre></div>
 <pre><code>$AA
-           AA.Open AA.High AA.Low AA.Close AA.Volume AA.Adjusted
-2017-07-31   35.97   36.44 35.665     36.4   2145900        36.4
+            Open  High    Low Close  Volume Adjusted
+2017-07-31 35.97 36.44 35.665  36.4 2145900     36.4
 
 $GE
-           GE.Open GE.High GE.Low GE.Close GE.Volume GE.Adjusted
-2017-07-31   25.54   25.69  25.49    25.61  30616300       25.61</code></pre>
+            Open  High   Low Close   Volume Adjusted
+2017-07-31 25.54 25.69 25.49 25.61 30616300    25.61</code></pre>
 <p>tickerEnvUpdate takes an enviroment with xts stock data, and updates each object with the latest data</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tickerEnvUpdate</span>(E)</code></pre></div>
 <pre><code>## [1] &quot;getting new data for  AA&quot;
@@ -96,26 +96,49 @@ $GE
 <pre><code>## NULL</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">eapply</span>(E, function(x)<span class="kw">tail</span>(x,<span class="dv">1</span>))</code></pre></div>
 <pre><code>## $AA
-##             Open High   Low Close  Volume Adjusted
-## 2017-08-04 37.34 37.5 36.73 37.42 2285800    37.42
+##             Open  High   Low Close  Volume Adjusted
+## 2017-08-11 37.21 37.91 36.93 37.78 2936200    37.78
 ## 
 ## $GE
-##             Open  High   Low Close   Volume Adjusted
-## 2017-08-04 25.75 25.85 25.62 25.78 23304900    25.78</code></pre>
+##            Open  High   Low Close   Volume Adjusted
+## 2017-08-11 25.4 25.45 25.19  25.2 18982500     25.2</code></pre>
 <p>buildStockDataSetFromEnv takes an enviroment with xts stock ticker data stored in it and merges it together in one data frame. It also uses functions from myfeatures.r ( a wrapper for the TTR package) to do feature engineering.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>(E)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## working here
+<span class="kw">ls</span>(E)</code></pre></div>
 <pre><code>## [1] &quot;AA&quot; &quot;GE&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(E$AA)</code></pre></div>
-<pre><code>##             Open  High   Low Close  Volume Adjusted
-## 2017-08-01 36.46 36.74 35.91 36.38 1939200    36.38
-## 2017-08-02 36.27 37.33 36.20 37.28 2965500    37.28
-## 2017-08-03 37.28 37.60 36.94 37.09 2884600    37.09
-## 2017-08-04 37.34 37.50 36.73 37.42 2285800    37.42</code></pre>
+<pre><code>##               Open    High     Low    Close  Volume Adjusted
+## 2000-01-03 134.288 134.870 129.822  96.8409 1291300 71.91576
+## 2000-01-04 130.405 131.893 129.758  97.5618 1859900 72.45111
+## 2000-01-05 131.376 139.659 131.052 103.3290 2598000 76.73391
+## 2000-01-06 139.142 139.530 136.747 101.5988 3740800 75.44909
+## 2000-01-07 136.812 140.048 136.488 101.4066 3774100 75.30630
+## 2000-01-10 136.553 141.018 136.294 101.2144 3192500 75.16355</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x&lt;-<span class="kw">buildStockDataSetFromEnv</span>(E)
 <span class="kw">dim</span>(x)</code></pre></div>
-<pre><code>## NULL</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(x)</code></pre></div>
-<pre><code>## NULL</code></pre>
+<pre><code>## [1] 8862   38</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(x,<span class="dv">2</span>)</code></pre></div>
+<pre><code>##                  Open      High       Low     Close   Volume  Adjusted
+## 2017-08-101 0.5480818 0.5345140 0.5896339 0.5639281 16672111 0.5639281
+## 2017-08-111 0.5244757 0.5139514 0.5536185 0.5454124 16775174 0.5454124
+##             Open.1  High.1   Low.1 Close.1 Volume.1 Adjusted.1   Open.2
+## 2017-08-101 25.924 26.0700 25.7445  25.906 35848530     25.906 25.16192
+## 2017-08-111 25.857 25.9975 25.6675  25.827 35744740     25.827 24.87552
+##               High.2    Low.2  Close.2 Volume.2 Adjusted.2       ATR
+## 2017-08-101 25.17549 24.68037 24.73607 13006789   24.73607 0.1821055
+## 2017-08-111 24.93605 24.63638 24.65459  2207326   24.65459 0.1734212
+##                  SMI.1      SMI.2      ADX AROON        BB      SDELT
+## 2017-08-101  -7.704715  -7.137698 34.54441   -80 0.2788175 -0.4872316
+## 2017-08-111 -12.397021  -8.189562 34.82588   -85 0.2341788  0.6705588
+##                       EMV      MACD      SAR OpenCloseDiffVol HighLowDiff
+## 2017-08-101 -2.313781e-06 -1.656485 26.31288         12168379        0.44
+## 2017-08-111 -1.890920e-06 -1.638141 26.27077          3796481        0.26
+##             SMAOpenClose Open.3 High.3 Low.3 Close.3 Volume.3 Adjusted.3
+## 2017-08-101        0.060  25.71  25.71 25.27    25.3 29678900       25.3
+## 2017-08-111        0.047  25.40  25.45 25.19    25.2 18982500       25.2
+##             tradeFlag tradeInd
+## 2017-08-101        NA       NA
+## 2017-08-111        NA       NA</code></pre>
 </div>
 
 

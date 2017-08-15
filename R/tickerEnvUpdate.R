@@ -48,6 +48,7 @@ tickerEnvUpdate<-function(e,
     }
     if(is.xts(newData)){
       colnames(newData)<-unlist(lapply(colnames(newData), function(x)strsplit(x,'[.]')[[1]][2]))
+      newData<-rbind( oldData, newData)
       assign(tempName, newData, envir = e)
     }
     Sys.sleep(4)

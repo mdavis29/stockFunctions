@@ -2,9 +2,8 @@
 
 export(T.flag)
 export(T.ind)
-export(buildPredictors)
 export(buildStockDataSetFromEnv)
-export(fixColnames)
 export(getHistoricalStocks)
 export(getSymbolList)
+export(getXtsFeatures)
 export(tickerEnvUpdate)

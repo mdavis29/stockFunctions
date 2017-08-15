@@ -8,3 +8,11 @@ eapply(E, function(x)tail(x,1))
 tickerEnvUpdate(E)
 eapply(E, function(x)tail(x,1))
 
+## ------------------------------------------------------------------------
+## working here
+ls(E)
+head(E$AA)
+x<-buildStockDataSetFromEnv(E)
+dim(x)
+tail(x,2)
+
