@@ -14,7 +14,7 @@ getHistoricalStocks<-function(symboList, e, startDate = '2000-01-01', endDate = 
     if(verbose)print(paste('getting', symboList[i]))
     try(getSymbols(symboList[i], warnings=FALSE, env = e, from = startDate, to = endDate, silent=TRUE))
     Sys.sleep(sleepTime )
-    tempData<-xts(get(symboList[i], e ))
+    tempData<-try(xts(get(symboList[i], e )))
     if(!is.xts(tempData)){failList<-append(failList, symboList[i])
       if(verbose)print(paste('failed', symboList[i]))
     }

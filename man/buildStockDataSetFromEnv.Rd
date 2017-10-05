@@ -10,6 +10,8 @@ buildStockDataSetFromEnv(e, stockNameList = NULL, verbose = FALSE)
 \item{e}{enviroment where the xts stock data is stored}
 
 \item{stockNameList}{a list of stockNames}
+
+\item{verbose}{print debugging output}
 }
 \value{
 a data frame of merge stock data

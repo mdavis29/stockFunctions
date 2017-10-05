@@ -4,7 +4,8 @@
 \alias{getXtsFeatures}
 \title{Build Predictors}
 \usage{
-getXtsFeatures(x, wid = 20, verbose = FALSE)
+getXtsFeatures(x, wid = 20, verbose = FALSE, stockName = NULL,
+  clusterModel = NULL)
 }
 \arguments{
 \item{x}{An xts object containing stock quotes (OHLCV info) from quant mod}

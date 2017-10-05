@@ -7,7 +7,7 @@
 #' @export
 #' @description takes and xts object and uses TTR package to create non lagged formated set of predictors (typically used to predict the trade Flag T.flag())
 #' @return xts object of predictors (not lagged) to be used to predict the trade signal
-getXtsFeatures<-function(x, wid = 20,verbose = FALSE){
+getXtsFeatures<-function(x, wid = 20,verbose = FALSE, stockName = NULL, clusterModel = NULL ){
   output<-data.frame(
     sdevs<-zoo::rollapply(x,width = wid,FUN =  sd, fill = NA, align = 'right' ),
     means<-zoo::rollapply(x,width = wid,FUN =  mean, fill = NA, align = 'right' ),
@@ -27,7 +27,14 @@ getXtsFeatures<-function(x, wid = 20,verbose = FALSE){
   output$HighLowDiff<-x[,'High'] - x[,'Low']
   output$SMAOpenClose<-SMA(x[,'Open'])-SMA(x[,'Close'])
   output$tradeFlag<-T.flag(T.ind(OHLCV(x)))
-  output$tradeInd<-T.ind(OHLCV(x))
+  if(!is.null(clusterModel)){
+    clusterPreds<- try(predictKmeans(clusterModel, output))
+    if(is.data.frame(clusterPreds)){
+      output<-cbind(output, clusterPreds)
+    }
+  }
+  output<-as.matrix(output)
+  rownames(output)<-paste(stockName, index(x), sep = ':')
   return(output)
   }
   

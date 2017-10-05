@@ -1,0 +1,45 @@
+---
+title: "stockToolsGuide"
+author: "Matthew Davis"
+date: "September 18, 2017"
+output: html_document
+---
+#### The following is a guide to stockTools
+
+
+Load the symbol list and get the historical data, load to enviroment e
+```{r, eval = FALSE}
+
+data("sp500Symbols")
+## build new data
+e<-new.env()
+failList <- getHistoricalStocks(sp500Symbols, e)
+stockDataEnv<-e
+save(stockDataEnv, file = 'stockDataEnv.rda')
+```
+
+#### Build a Data Frame From Stock Ticker Data 
+
+Load pre downloaded data from and enviroment, saved as an rda file
+set the dependent and class variables. 
+This uses the buildStockdatasetfromEnv function to take all stocks in the enviroment, and turn them into a data data frame suitable for modeling 
+```{r, cache = TRUE}
+load('stockDataEnv.rda')
+rd<-na.buildStockDataSetFromEnv(stockDataEnv)
+## get Varible Names
+classCol<- "tradeFlag" 
+predVars<-colnames(rd)[!colnames(rd) %in% c( "time","tradeInd","stockName",classCol)]
+dim(rd)
+```
+
+Load a pre trained cluster model for the data and use cluster prediction as features for the rd data frame
+
+```{r}
+
+load('clusterFit.rda') ## loads as cluster fit
+rd.clean<-na.omit(rd)
+km.df<-predictKmeans(clusterFit, rd.clean)
+```
+
+```
+
